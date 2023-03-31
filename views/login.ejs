@@ -4,14 +4,16 @@
         <title>Log in</title>
         <link rel="stylesheet" href="../font/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/bootstrap.min.css"/>
-        <link href="../css/login/login.css" rel="stylesheet">
-        <link href="../css/login/navbar.css" rel="stylesheet">
+        <link href="stylesheets/login/login.css" rel="stylesheet">
+        <link href="stylesheets/login/navbar.css" rel="stylesheet">
       </head>
     <body class="position-relative" data-bs-spy="scroll">
+        <div class="container">
       <%- include('./partials/navbar.ejs') %>
       <div data-spy="scroll" data-target="#navbar" data-offset="0">
         <%- include('./partials/login.ejs') %>
       </div>
       <%- include('./partials/scripts.ejs') %>
+    </div>
     </body>
 </html>

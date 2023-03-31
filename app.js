@@ -9,6 +9,9 @@ var loginRouter = require('./routes/login');
 // var highlightsRouter = require('./routes/highlights');
 
 var app = express();
+var passport = require('passport')
+var session = require('express-session');
+var JsonStore = require('express-session-json')(session);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +27,17 @@ app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 // app.use('/highlights', highlightsRouter);
+
+//authentication and keep logged in;
+app.use(express.static(__dirname + '/node_modules/bootstrap-icons'));
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  store: new JsonStore()
+}));
+app.use(passport.authenticate('session'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
