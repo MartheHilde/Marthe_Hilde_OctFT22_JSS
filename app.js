@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 const fs = require("fs")
@@ -60,7 +61,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
-app.use('/memes', memeRouter)
+app.use('/memes', memeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

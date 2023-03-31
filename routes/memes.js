@@ -3,6 +3,8 @@ var router = express.Router();
 const axios = require('axios');
 require("dotenv").config();
 
+console.log("API_URL:", process.env.API_URL);
+
 router.get("/", function (req, res, next) {
   axios.get(process.env.API_URL).then((resp) => {
     const memes = resp.data.data.memes;
