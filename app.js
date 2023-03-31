@@ -11,6 +11,7 @@ var JsonStore = require('express-session-json')(session);
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
+var memeRouter = require('./routes/memes');
 
 var app = express();
 
@@ -59,6 +60,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/memes', memeRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
