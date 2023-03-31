@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 const fs = require("fs")
 const path = require("path")
+const session = require('express-session');
 var passport = require('passport')
-var LocalStrategy = require('passport-local');
+var LocalStrategy = require('passport-local').Strategy;
 
 
 passport.serializeUser(function(user, cb) {
@@ -37,13 +38,20 @@ router.post('/password', passport.authenticate('local', {
     failureRedirect: '/login'
   }));
 
-  router.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     if(!req.user) {
       res.render('login', {user: null});
     }
     else {
       res.render('login', {user: req.user});
     }
+});
+
+  router.post('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/login');
   });
+});
 
 module.exports = router

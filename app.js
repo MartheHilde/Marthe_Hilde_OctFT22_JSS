@@ -1,17 +1,18 @@
 var createError = require('http-errors');
 var express = require('express');
+const fs = require("fs")
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
+var JsonStore = require('express-session-json')(session);
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
-// var highlightsRouter = require('./routes/highlights');
 
 var app = express();
-var passport = require('passport')
-var session = require('express-session');
-var JsonStore = require('express-session-json')(session);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,12 +24,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
-
-app.use('/', indexRouter);
-app.use('/login', loginRouter);
-// app.use('/highlights', highlightsRouter);
-
-//authentication and keep logged in;
 app.use(express.static(__dirname + '/node_modules/bootstrap-icons'));
 
 app.use(session({
@@ -37,7 +32,33 @@ app.use(session({
   saveUninitialized: false,
   store: new JsonStore()
 }));
-app.use(passport.authenticate('session'));
+
+// Passport middleware setup
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.use(new LocalStrategy(function(username, password, done) {
+  let usersArray = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./data/users.json")));
+  let filteredArray = usersArray.filter(x => x.username == username);
+  if (filteredArray.length > 0) {
+    let usersData = filteredArray[0];
+    if (usersData.password == password) {
+      return done(null, usersData);
+    }
+  }
+  return done(null, false);
+}));
+
+app.use('/', indexRouter);
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -56,4 +77,3 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-
