@@ -8,9 +8,23 @@
   <link href="../../stylesheets/memes/navbar.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="../../js/memes/memeid.js"></script>
+  <script src="./js/search.js"></script>
+
 </head>
 <body class="position-relative" data-bs-spy="scroll">
   <%- include('./partials/navbar.ejs') %>
+
+  <section class="container d-flex justify-content-center" id="searchBar">
+    <div class="row">
+      <div class="col-md-8">
+        <input type="text" id="memeInput" placeholder="Search for memes.." class="form-control">
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-success btn-block mb-3" type="submit" onclick="searchForMemes()">Go!</button>
+      </div>
+    </div>
+  </section>
+
   <section class="container">
     <% if(user) { %>
       <table class="table" id="memes-table">
@@ -61,5 +75,6 @@
   </section>
   <script src="../../js/memes.js"></script>
   <%- include('./partials/scripts.ejs') %>
+  
 </body>
 </html>

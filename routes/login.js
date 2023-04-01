@@ -34,7 +34,7 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   }));
 
 router.post('/password', passport.authenticate('local', {
-    successReturnToOrRedirect: '/',
+    successReturnToOrRedirect: '/memes',
     failureRedirect: '/login'
   }));
 
