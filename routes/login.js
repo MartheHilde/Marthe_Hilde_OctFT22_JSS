@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const fs = require("fs")
 const path = require("path")
-const session = require('express-session');
+
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
 
