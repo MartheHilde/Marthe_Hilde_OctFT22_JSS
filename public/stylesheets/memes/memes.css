@@ -8,3 +8,7 @@
 body {
   padding-top: 25px;
 }
+
+.visited-row td {
+  background-color: rgb(214, 242, 214);
+}

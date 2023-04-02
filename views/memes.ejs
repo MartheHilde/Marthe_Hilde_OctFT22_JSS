@@ -39,18 +39,32 @@
           </tr>
         </thead>
         <tbody>
+          <% console.log(viewedMemes) %>
+
           <% data.forEach(meme => { %>
-            <tr>
-              <th scope="row"><%= meme.id %></th>
-              <td><%= `${meme.name}` %></td>
-              <td><%= `${meme.width} x ${meme.height}` %></td>
-              <td><img src="<%= meme.url %>" alt="<%= meme.name %>" width="100" height="100"></td>
-              <td>
+            
+              <% if (viewedMemes && viewedMemes[meme.id]) { %>
+                <tr class="visited-row">
+                <td scope="row"><%= meme.id %></td>
+                <td><%= `${meme.name}` %></td>
+                <td><%= `${meme.width} x ${meme.height}` %></td>
+                <td><img src="<%= meme.url %>" alt="<%= meme.name %>" width="100" height="100"></td>
+                <td>
+                <form>
+                  <button id="detailButton" class="btn btn-success" type="button" onclick="window.location.href='/meme/' + '<%= meme.id %>'">Details</button>
+                </form>
+              <% } else { %>
+                <tr>
+                <th scope="row"><%= meme.id %></th>
+                <td><%= `${meme.name}` %></td>
+                <td><%= `${meme.width} x ${meme.height}` %></td>
+                <td><img src="<%= meme.url %>" alt="<%= meme.name %>" width="100" height="100"></td>
+                <td>
                 <form>
                   <button id="detailButton" class="btn btn-primary" type="button" onclick="window.location.href='/meme/' + '<%= meme.id %>'">Details</button>
                 </form>
-                
               </td>
+              <% } %>
             </tr>
           <% }) %>
         </tbody>

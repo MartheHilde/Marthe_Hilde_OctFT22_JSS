@@ -13,6 +13,9 @@ router.get("/:id", function (req, res, next) {
       .then((resp) => {
         const meme = resp.data.data.memes.find((meme) => meme.id === id);
 
+        req.session.viewedMemes = req.session.viewedMemes || {};
+        req.session.viewedMemes[meme.id] = true;
+
         if (meme) {
           res.render("meme", { user: req.user, meme: meme });
         } else {

@@ -33,7 +33,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
-  store: new JsonStore()
+  store: new JsonStore({ path: 'data', filename: "session.json"})
 }));
 
 // Passport middleware setup
