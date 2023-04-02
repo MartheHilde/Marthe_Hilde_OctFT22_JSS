@@ -8,7 +8,7 @@
   <link href="../../stylesheets/memes/navbar.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="../../js/memes/memeid.js"></script>
-  <script src="./js/search.js"></script>
+  <script src="../../js/search.js"></script>
 
 </head>
 <body class="position-relative" data-bs-spy="scroll">
@@ -51,7 +51,7 @@
                 <td><img src="<%= meme.url %>" alt="<%= meme.name %>" width="100" height="100"></td>
                 <td>
                 <form>
-                  <button id="detailButton" class="btn btn-success" type="button" onclick="window.location.href='/meme/' + '<%= meme.id %>'">Details</button>
+                  <button id="detailButton" class="btn btn-success" type="button" onclick="window.location.href='/meme/' + '<%= meme.id %>'">Visited</button>
                 </form>
               <% } else { %>
                 <tr>

@@ -11,25 +11,27 @@ router.get("/", function (req, res, next) {
   const viewedMemes = req.session.viewedMemes;
 
   if (cachedMemes) {
-    if (!req.user) {
-      res.render("memes", { user: null, data: cachedMemes, viewedMemes: viewedMemes });
+    if (req.user) {
+      if (viewedMemes) {
+        res.render("memes", { user: req.user, data: cachedMemes, viewedMemes: viewedMemes });
+      } else {
+        res.render("memes", { user: req.user, data: cachedMemes, viewedMemes: {} });
+      }
     } else {
-      res.render("memes", { user: req.user, data: cachedMemes, viewedMemes: viewedMemes });
+      res.render("memes", { user: null, data: cachedMemes, viewedMemes: {} });
     }
   } else {
     axios.get(process.env.API_URL).then((resp) => {
       const memes = resp.data.data.memes;
       
-      cachedMemes = memes;
-
-      if (!req.user) {
-        res.render("memes", { user: null, data: memes });
-      } else {
+      if (req.user) {
         if (viewedMemes) {
           res.render("memes", { user: req.user, data: memes, viewedMemes: viewedMemes });
         } else {
           res.render("memes", { user: req.user, data: memes, viewedMemes: {} });
         }
+      } else {
+        res.render("memes", { user: null, data: memes });
       }
     }).catch((error) => {
       console.error(error);
