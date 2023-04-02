@@ -1,35 +1,60 @@
-<section class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <section class="login" id="login">
-          <div class="p-5 text-center">
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="../images/logo.png"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
             <% if (!user) { %>
-              <h1>Sign in</h1>
-              <form action="/login/password" method="post">
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input id="username" name="username" type="text" autocomplete="username" class="form-control" required autofocus>
-                </div>
-                <div class="form-group">
-                  <label for="current-password">Password</label>
-                  <input id="current-password" name="password" type="password" autocomplete="current-password" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Sign in</button>
-                </div>
-              </form>
-            <% } %>
-            <% if (user) { %>
-              <div class="form-group">
-                <p>Hey <%=user.username%>!</p>
-                <form action="/login/logout" method="post">
-                  <button class="btn btn-primary logout" type="submit">Sign out</button>
-                </form>
+            <form action="/login/password" method="post">
+
+              <div class="d-flex align-items-center mb-3 pb-1">
+                <span class="h1 fw-bold mb-0">Welcome back!</span>
               </div>
+
+              <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Please sign into your account</h5>
+
+              <div class="form-outline mb-4">
+                <input type="text" id="username" name="username" autocomplete="username"
+                  class="form-control form-control-lg" required autofocus />
+                <label class="form-label" for="username">Username</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="password" id="current-password" name="password" autocomplete="current-password"
+                  class="form-control form-control-lg" required />
+                <label class="form-label" for="current-password">Password</label>
+              </div>
+
+              <div class="pt-1 mb-4">
+                <button class="btn btn-dark btn-lg btn-block" type="submit">Sign in</button>
+              </div>
+
+              
+            </form>
             <% } %>
+
+            <% if (user) { %>
+            <div class="form-group text-center">
+              <p>Hi there, <%=user.username%>! </p>
+              <p>Leaving so soon?</p>
+              <form action="/login/logout" method="post">
+                <button class="btn btn-dark btn-lg btn-block" type="submit">Sign out</button>
+              </form>
+            </div>
+            <% } %>
+
           </div>
-        </section>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+
+  </div>
 </section>
-  

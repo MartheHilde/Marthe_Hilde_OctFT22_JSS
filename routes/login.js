@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const fs = require("fs")
 const path = require("path")
-
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -44,7 +43,7 @@ router.get('/', function(req, res, next) {
     }
     else {
       res.render('login', {user: req.user});
-    }
+    } 
 });
 
   router.post('/logout', function(req, res, next) {

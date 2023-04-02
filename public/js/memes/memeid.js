@@ -1,4 +1,5 @@
 function open_new_window(location) {
+  //Change button after click
   fetch(`${window.location.href}/${location}`, {
       method: 'POST'
     }).then((results) => {
