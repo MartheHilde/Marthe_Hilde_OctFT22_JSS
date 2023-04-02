@@ -4,8 +4,5 @@
     (Even if the Memes Overview page is refreshed).
     - Change the color of the button instead, more visually appealing :-)
 
-### Last
-    Display "log out" in nav-bar
-
 
 
